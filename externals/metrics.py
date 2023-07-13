@@ -38,7 +38,6 @@ def fbeta_numpy(targets, preds, beta=0.5, smooth=1e-5):
 
 def calc_fbeta(mask, mask_pred):
     mask = mask.astype(int).flatten()
-    # mask = np.where(mask == 2, 1, 0)
     mask_pred = mask_pred.flatten()
 
     best_th = 0

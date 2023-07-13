@@ -5,6 +5,7 @@ import segmentation_models_pytorch as smp
 import torch
 import torch.nn as nn
 import torch.nn.functional as F 
+from unetr import UNETR
 
 class CNN3D_MulticlassSegformer(nn.Module):
     def __init__(self, cfg):
@@ -17,12 +18,12 @@ class CNN3D_MulticlassSegformer(nn.Module):
         self.conv3d_3 = nn.Conv3d(8, 16, kernel_size=(3, 3, 3), stride=1, padding=(1, 1, 1))
         self.conv3d_4 = nn.Conv3d(16, 32, kernel_size=(3, 3, 3), stride=1, padding=(1, 1, 1))
 
-        # Segformer for Binary Classification
+        # Segformer for Multiclass Classification
         self.xy_encoder_2d = SegformerForSemanticSegmentation.from_pretrained(
                                             "nvidia/mit-b1",
-                                            num_labels=3,  #Change
+                                            num_labels=3,  
                                             ignore_mismatched_sizes=True,
-                                            num_channels=48  # Note: Channels set to 33 or 35 one hot(32 + 1 for the mask)
+                                            num_channels=48  
                                 )
         
         # Upscale Layers
@@ -94,12 +95,12 @@ class CNN3D_SegformerBIG(nn.Module):
                                             # attention_probs_dropout_prob = 0.3,
                                             classifier_dropout_prob = 0.3,
                                             drop_path_rate = 0.3,
-                                            hidden_dropout_prob = 0.3,
-                                            
-                                            
+                                            hidden_dropout_prob = 0.3,       
                                 )
+        
         self.upscaler1 = nn.ConvTranspose2d(1, 1, kernel_size=(4, 4), stride = 2, padding=1)
         self.upscaler2 = nn.ConvTranspose2d(1, 1, kernel_size=(4, 4), stride = 2, padding=1)
+        
     def forward(self, image):
         output = self.conv3d_1(image)
         output = self.conv3d_2(output)
@@ -242,8 +243,7 @@ class Unet3D_Segformer(nn.Module):
         output = self.upscaler2(output)
         return output
 
-from unetr import UNETR
-class UNETR_Segformer(nn.Module):
+class UNETR_MulticlassSegformer(nn.Module):
     def __init__(self, cfg):
         super().__init__()
         self.cfg = cfg
@@ -273,3 +273,32 @@ class UNETR_Segformer(nn.Module):
         output = self.upscaler2(output)
         return output
     
+class UNETR_Segformer(nn.Module):
+    def __init__(self, cfg):
+        super().__init__()
+        self.cfg = cfg
+        dropout = .1
+        self.dropout = nn.Dropout2d(dropout)
+        self.encoder = UNETR(
+            in_channels=1,
+            out_channels=32,
+            img_size=(16, 512, 512),
+        )
+        self.encoder_2d = SegformerForSemanticSegmentation.from_pretrained(
+            "nvidia/mit-b5",
+            num_labels=1, 
+            ignore_mismatched_sizes=True,
+            num_channels=32
+        )
+        self.upscaler1 = nn.ConvTranspose2d(
+            1, 1, kernel_size=(4, 4), stride=2, padding=1)
+        self.upscaler2 = nn.ConvTranspose2d(
+            1, 1, kernel_size=(4, 4), stride=2, padding=1)
+
+    def forward(self, image):
+        output = self.encoder(image).max(axis=2)[0]
+        output = self.dropout(output)
+        output = self.encoder_2d(output).logits
+        output = self.upscaler1(output)
+        output = self.upscaler2(output)
+        return output

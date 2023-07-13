@@ -4,7 +4,7 @@ import cv2
 import albumentations as A
 from torch.utils.data import Dataset
 
-def read_image_mask(CFG, fragment_id, is_multiclass=False):
+def read_image_mask(CFG, fragment_id):
 
     images = []
 
@@ -26,7 +26,7 @@ def read_image_mask(CFG, fragment_id, is_multiclass=False):
         
     images = np.stack(images, axis=2)
     
-    if is_multiclass: # multiclass code
+    if CFG.is_multiclass: # multiclass code
         
         lbl = cv2.imread(CFG.comp_dataset_path + f"train/{fragment_id}/inklabels.png", 0)
         mask_background = cv2.imread(CFG.comp_dataset_path + f"train/{fragment_id}/mask.png", 0)
