@@ -16,7 +16,7 @@ Key success factors included the ensemble of multiple model variants, the select
 
 The requirements.txt file should list all Python libraries that your notebooks depend on, and they will be installed using:
 
-pip install -r requirements.txt
+`pip install -r requirements.txt`
 
 ## Notebooks
 
@@ -61,8 +61,10 @@ https://github.com/lukemelas/EfficientNet-PyTorch
 
 you may also need the following commands if you encounter errors while importing open-cv
 
+`
 !sudo apt-get update
 !sudo apt-get install -y libgl1-mesa-glx
+`
 
 @article {10.7554/eLife.57613,
 article_type = {journal},
