@@ -11,3 +11,4 @@ segmentation_models_pytorch
 warmup_scheduler
 einops
 monai
+efficientnet_pytorch
