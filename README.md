@@ -14,11 +14,13 @@ Key success factors included the ensemble of multiple model variants, the select
 
 ## Requirements and Weights
 
-The requirements for running our solution are included as part of the multiclass file. The weights are not included in this repository but can be requested from the team.
+The requirements.txt file should list all Python libraries that your notebooks depend on, and they will be installed using:
+
+pip install -r requirements.txt
 
 ## Notebooks
 
-We have two notebooks: `basev6` and `basev6-multiclass`, for the regular and multiclass solutions respectively. 
+We have two notebooks: `training` and `training-multiclass`, for the regular and multiclass solutions respectively. 
 
 ## External Folder
 
@@ -33,11 +35,37 @@ The files in the `external` folder are:
 - `training_procedures.py`
 - `utils.py`
 
-## External Repos Needed
+## External Repos/Command Needed
+
+This code relies on several contributions by other users:
 
 #3D Unet Code
+
 !cd /root && git clone git@github.com:wolny/pytorch-3dunet.git && cd pytorch-3dunet && pip install -e .
-This command is included as part of the multiclass jupyter notebook.
+
+you may also need the following commands if you encounter errors while importing open-cv
+
+!sudo apt-get update
+!sudo apt-get install -y libgl1-mesa-glx
+
+@article {10.7554/eLife.57613,
+article_type = {journal},
+title = {Accurate and versatile 3D segmentation of plant tissues at cellular resolution},
+author = {Wolny, Adrian and Cerrone, Lorenzo and Vijayan, Athul and Tofanelli, Rachele and Barro, Amaya Vilches and Louveaux, Marion and Wenzl, Christian and Strauss, Sören and Wilson-Sánchez, David and Lymbouridou, Rena and Steigleder, Susanne S and Pape, Constantin and Bailoni, Alberto and Duran-Nebreda, Salva and Bassel, George W and Lohmann, Jan U and Tsiantis, Miltos and Hamprecht, Fred A and Schneitz, Kay and Maizel, Alexis and Kreshuk, Anna},
+editor = {Hardtke, Christian S and Bergmann, Dominique C and Bergmann, Dominique C and Graeff, Moritz},
+volume = 9,
+year = 2020,
+month = {jul},
+pub_date = {2020-07-29},
+pages = {e57613},
+citation = {eLife 2020;9:e57613},
+doi = {10.7554/eLife.57613},
+url = {https://doi.org/10.7554/eLife.57613},
+keywords = {instance segmentation, cell segmentation, deep learning, image analysis},
+journal = {eLife},
+issn = {2050-084X},
+publisher = {eLife Sciences Publications, Ltd},
+}
 
 
 # Citation
@@ -48,6 +76,6 @@ If you use this software or the associated data in your research, please cite us
 author = {Ryan Chesler, Ted Kyi, Alexander Loftus, Aina Tersol},
 title = {Solution for Kaggle Vesuvius Ink Detection Challenge},
 year = {2023},
-url = {TBD},
+url = {https://github.com/ainatersol/Vesuvius-InkDetection},
 version = 0,
 }

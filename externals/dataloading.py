@@ -4,7 +4,7 @@ import cv2
 import albumentations as A
 from torch.utils.data import Dataset
 
-def read_image_mask(CFG, fragment_id):
+def read_image_mask(CFG, fragment_id, is_multiclass=False):
 
     images = []
 
@@ -23,23 +23,25 @@ def read_image_mask(CFG, fragment_id):
         image = np.pad(image, [(0, pad0), (0, pad1)], constant_values=0)
 
         images.append(image)
+        
     images = np.stack(images, axis=2)
     
-    # single-class code
-    # mask = cv2.imread(CFG.comp_dataset_path + f"train/{fragment_id}/inklabels.png", 0)
-    # mask = np.pad(mask, [(0, pad0), (0, pad1)], constant_values=0)
-    # mask /= 255.0
-    
-    # multiclass code
-    lbl = cv2.imread(CFG.comp_dataset_path + f"train/{fragment_id}/inklabels.png", 0)
-    mask_background = cv2.imread(CFG.comp_dataset_path + f"train/{fragment_id}/mask.png", 0)
-    
-    lbl = lbl / 255.0
-    mask_background = mask_background / 255.0
-    
-    mask = mask_background + lbl
-    mask = np.pad(mask, [(0, pad0), (0, pad1)], constant_values=0)
+    if is_multiclass: # multiclass code
+        
+        lbl = cv2.imread(CFG.comp_dataset_path + f"train/{fragment_id}/inklabels.png", 0)
+        mask_background = cv2.imread(CFG.comp_dataset_path + f"train/{fragment_id}/mask.png", 0)
 
+        lbl /= 255.0
+        mask_background /= 255.0
+
+        mask = mask_background + lbl
+        mask = np.pad(mask, [(0, pad0), (0, pad1)], constant_values=0)
+    
+    else: # single-class code
+        mask = cv2.imread(CFG.comp_dataset_path + f"train/{fragment_id}/inklabels.png", 0)
+        mask = np.pad(mask, [(0, pad0), (0, pad1)], constant_values=0)
+        mask /= 255.0
+        
     mask = mask.astype('float32')
     
     return images, mask
