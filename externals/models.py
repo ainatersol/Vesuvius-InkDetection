@@ -302,3 +302,111 @@ class UNETR_Segformer(nn.Module):
         output = self.upscaler1(output)
         output = self.upscaler2(output)
         return output
+
+
+# INFERENCE
+class cnn3d_segformer_more_filters(nn.Module):
+    def __init__(self, cfg):
+        super().__init__()
+        self.cfg = cfg
+        
+        self.conv3d_1 = nn.Conv3d(1, 4, kernel_size=(3, 3, 3), stride=1, padding=(1, 1, 1))
+        self.conv3d_2 = nn.Conv3d(4, 8, kernel_size=(3, 3, 3), stride=1, padding=(1, 1, 1))
+        self.conv3d_3 = nn.Conv3d(8, 16, kernel_size=(3, 3, 3), stride=1, padding=(1, 1, 1))
+        self.conv3d_4 = nn.Conv3d(16, 64, kernel_size=(3, 3, 3), stride=1, padding=(1, 1, 1))
+
+        self.xy_encoder_2d = SegformerForSemanticSegmentation(self.cfg.segformer_config)
+        self.upscaler1 = nn.ConvTranspose2d(1, 1, kernel_size=(4, 4), stride = 2, padding=1)
+        self.upscaler2 = nn.ConvTranspose2d(1, 1, kernel_size=(4, 4), stride = 2, padding=1)
+        
+    def forward(self, image):
+        output = self.conv3d_1(image)
+        output = self.conv3d_2(output)
+        output = self.conv3d_3(output)
+        output = self.conv3d_4(output).max(axis = 2)[0]
+        output = self.xy_encoder_2d(output).logits
+        output = self.upscaler1(output)
+        output = self.upscaler2(output)
+        return output
+
+class cnn3d_segformer(nn.Module):
+    def __init__(self, cfg):
+        super().__init__()
+        self.cfg = cfg
+        
+        self.conv3d_1 = nn.Conv3d(1, 4, kernel_size=(3, 3, 3), stride=1, padding=(1, 1, 1))
+        self.conv3d_2 = nn.Conv3d(4, 8, kernel_size=(3, 3, 3), stride=1, padding=(1, 1, 1))
+        self.conv3d_3 = nn.Conv3d(8, 16, kernel_size=(3, 3, 3), stride=1, padding=(1, 1, 1))
+        self.conv3d_4 = nn.Conv3d(16, 32, kernel_size=(3, 3, 3), stride=1, padding=(1, 1, 1))
+
+        self.xy_encoder_2d = SegformerForSemanticSegmentation(self.cfg.segformer_config)
+        self.upscaler1 = nn.ConvTranspose2d(1, 1, kernel_size=(4, 4), stride = 2, padding=1)
+        self.upscaler2 = nn.ConvTranspose2d(1, 1, kernel_size=(4, 4), stride = 2, padding=1)
+        
+    def forward(self, image):
+        output = self.conv3d_1(image)
+        output = self.conv3d_2(output)
+        output = self.conv3d_3(output)
+        output = self.conv3d_4(output).max(axis = 2)[0]
+        output = self.xy_encoder_2d(output).logits
+        output = self.upscaler1(output)
+        output = self.upscaler2(output)
+        return output
+
+    
+class unet3d_segformer(nn.Module):
+    def __init__(self, cfg):
+        super().__init__()
+        self.cfg = cfg
+        
+        self.model = get_model({"name":"UNet3D", "in_channels":1, "out_channels":16, "f_maps":8, "num_groups":4, "is_segmentation":False})
+        self.encoder_2d = SegformerForSemanticSegmentation(self.cfg.segformer_config)
+        self.upscaler1 = nn.ConvTranspose2d(1, 1, kernel_size=(4, 4), stride = 2, padding=1)
+        self.upscaler2 = nn.ConvTranspose2d(1, 1, kernel_size=(4, 4), stride = 2, padding=1)
+    def forward(self, image):
+        output = self.model(image).max(axis = 2)[0]
+        output = self.encoder_2d(output).logits
+        output = self.upscaler1(output)
+        output = self.upscaler2(output)
+        return output
+    
+class unet3d_segformer_jumbo(nn.Module):
+    def __init__(self, cfg):
+        super().__init__()
+        self.cfg = cfg
+        
+        self.model = get_model({"name":"UNet3D", "in_channels":1, "out_channels":32, "f_maps":8, "num_groups":4, "is_segmentation":False})
+        self.encoder_2d = SegformerForSemanticSegmentation(self.cfg.segformer_config)
+        self.upscaler1 = nn.ConvTranspose2d(1, 1, kernel_size=(4, 4), stride = 2, padding=1)
+        self.upscaler2 = nn.ConvTranspose2d(1, 1, kernel_size=(4, 4), stride = 2, padding=1)
+    def forward(self, image):
+        output = self.model(image).max(axis = 2)[0]
+        output = self.encoder_2d(output).logits
+        output = self.upscaler1(output)
+        output = self.upscaler2(output)
+        return output
+
+class UNETR_SegformerMC(nn.Module):
+    def __init__(self, cfg, dropout = .2):
+        super().__init__()
+        self.cfg = cfg
+        self.dropout = nn.Dropout2d(dropout)
+        self.encoder = UNETR(
+            in_channels=1,
+            out_channels=32,
+            img_size=(16, self.cfg.size, self.cfg.size),
+#             conv_block=True
+        )
+        self.encoder_2d = SegformerForSemanticSegmentation(self.cfg.segformer_config)
+        self.upscaler1 = nn.ConvTranspose2d(
+            3, 3, kernel_size=(4, 4), stride=2, padding=1)
+        self.upscaler2 = nn.ConvTranspose2d(
+            3, 3, kernel_size=(4, 4), stride=2, padding=1)
+
+    def forward(self, image):
+        output = self.encoder(image).max(axis=2)[0]
+        output = self.dropout(output)
+        output = self.encoder_2d(output).logits
+        output = self.upscaler1(output)
+        output = self.upscaler2(output)
+        return output[:, 2:, :, :]
