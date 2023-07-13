@@ -39,9 +39,25 @@ The files in the `external` folder are:
 
 This code relies on several contributions by other users:
 
-#3D Unet Code
+#3D Unet Code 
 
+We were finding difficulties pip installing the unet3d implementation. Hence, we have 'brutally scraped' the bits we needed. You will find them under externals/unet3d/
+
+The original repo can be cloned as follows:
 !cd /root && git clone git@github.com:wolny/pytorch-3dunet.git && cd pytorch-3dunet && pip install -e .
+
+(If you want to use the official repo; remember to add the repo to the python path to be able to use the content in the unet3d folder)
+
+import sys
+sys.path.append('/path/to/your/directory')
+
+You'll also need `timm-pytorch-image-models`, and `efficientnet-pytorch`. You may need a custom einops. On the actual notebook we submitted, we put the models on the github links above into the kaggle datasets below:
+https://www.kaggle.com/datasets/ryches/einops
+https://www.kaggle.com/datasets/ryches/unet3d
+
+Here are the links to the other repos. 
+https://timm.fast.ai/
+https://github.com/lukemelas/EfficientNet-PyTorch
 
 you may also need the following commands if you encounter errors while importing open-cv
 
