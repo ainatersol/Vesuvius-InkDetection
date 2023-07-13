@@ -5,7 +5,7 @@ import segmentation_models_pytorch as smp
 import torch
 import torch.nn as nn
 import torch.nn.functional as F 
-from unetr import UNETR
+from externals.unetr import UNETR
 
 class CNN3D_MulticlassSegformer(nn.Module):
     def __init__(self, cfg):
