@@ -35,7 +35,7 @@ Detail setup description
 2. Notebooks
 3. External repos and helper functions
 
-### 1. Requirements and weights
+### 2.1. Requirements and weights
 
 The requirements.txt file should list all Python libraries that your notebooks depend on, and they will be installed using:
 
@@ -45,12 +45,12 @@ pip install -r requirements.txt
 
 Pretrained weights used for training are included as part of the requirements.
 
-### 2. Notebooks
+### 2.2. Notebooks
 
 We have two training notebooks: `training` and `training-multiclass`, for the regular and multiclass solutions respectively. 
 We have one inference notebook.
 
-### External repos and helper functions
+### 2.3. External repos and helper functions
 
 The `external` folder contains helper functions defining the different model architectures `model.py`, dataloading, postprocessing utils... 
 
