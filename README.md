@@ -11,8 +11,6 @@ We utilized data augmentations and followed a standard approach using the AdamW 
 Key success factors included the ensemble of multiple model variants, the selection of a depth-invariant solution, crop size selection, augmentations to ensure rotation and flip invariance, and the addition of post-processing techniques. We used standard tools such as PyTorch for implementation and trained our models in parallel on a setup with 3 A6000 GPUs, with each model taking roughly 10 hours to train.
 
 **Video on our solution**: https://www.youtube.com/watch?v=IWySc8s00P0  
-[![video](https://img.youtube.com/vi/IWySc8s00P0 /0.jpg)](https://www.youtube.com/watch?v=IWySc8s00P0 )
-
 **Google Slides Presentation on our solution**: https://docs.google.com/presentation/d/1YZ_KfjSm9tbzXisOwVBalJ-WVlvOF65iugZa73I8MuI/edit?usp=sharing
 
 ## Quickstart
