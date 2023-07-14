@@ -132,6 +132,12 @@ The weights included in the winning ensamble:
 
 Make sure to download them to reproduce our solution.
 
+```
+pip install kaggle
+export KAGGLE_USERNAME=<kaggle_username>
+export KAGGLE_KEY=<kaggle key>
+kaggle datasets download -d ryches/unet3d
+```
 
 ## 4. Training
 
