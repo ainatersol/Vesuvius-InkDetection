@@ -62,11 +62,7 @@ model = UNETR_Segformer(CFG)
 
 #### External Repos/Command Needed
 
-This code relies on several contributions by other users, most of them are 
-
-#3D Unet Code 
-
-We were finding difficulties pip installing the unet3d implementation. Hence, we have 'brutally scraped' the bits we needed. You will find them under externals/unet3d/
+This code relies on several contributions by other users, most of them are pip installable and have been included as part of the requirements. However, we were finding difficulties pip installing the unet3d implementation. Hence, we have 'brutally scraped' the bits we needed. You will find them under pytorch3dunet/unet3d/
 
 The original repo can be cloned as follows:
 !cd /root && git clone git@github.com:wolny/pytorch-3dunet.git && cd pytorch-3dunet && pip install -e .
@@ -78,16 +74,15 @@ import sys
 sys.path.append('/path/to/your/directory')
 ```
 
-You'll also need `timm-pytorch-image-models`, and `efficientnet-pytorch`. You may need a custom einops. On the actual notebook we submitted, we put the models on the github links above into the kaggle datasets below:
+You should have all of the external information used within the kaggle datasets below.
 https://www.kaggle.com/datasets/ryches/einops
 https://www.kaggle.com/datasets/ryches/unet3d
 
-Here are the links to the other repos. 
+Here are the links to other repos used as part of this work.
 https://timm.fast.ai/
 https://github.com/lukemelas/EfficientNet-PyTorch
 
 you may also need the following commands if you encounter errors while importing open-cv
-
 ```
 !sudo apt-get update
 !sudo apt-get install -y libgl1-mesa-glx
