@@ -69,8 +69,9 @@ This code relies on several contributions by other users, most of them are
 We were finding difficulties pip installing the unet3d implementation. Hence, we have 'brutally scraped' the bits we needed. You will find them under externals/unet3d/
 
 The original repo can be cloned as follows:
+```
 !cd /root && git clone git@github.com:wolny/pytorch-3dunet.git && cd pytorch-3dunet && pip install -e .
-
+```
 (If you want to use the official repo; remember to add the repo to the python path to be able to use the content in the unet3d folder)
 
 ```
