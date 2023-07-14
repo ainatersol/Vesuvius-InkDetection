@@ -65,8 +65,9 @@ model = UNETR_Segformer(CFG)
 This code relies on several contributions by other users, most of them are pip installable and have been included as part of the requirements. However, we were finding difficulties pip installing the unet3d implementation. Hence, we have 'brutally scraped' the bits we needed. You will find them under pytorch3dunet/unet3d/
 
 The original repo can be cloned as follows:
-!cd /root && git clone git@github.com:wolny/pytorch-3dunet.git && cd pytorch-3dunet && pip install -e .
-
+```
+cd /root && git clone git@github.com:wolny/pytorch-3dunet.git && cd pytorch-3dunet && pip install -e .
+```
 (If you want to use the official repo; remember to add the repo to the python path to be able to use the content in the unet3d folder)
 
 ```
@@ -113,8 +114,9 @@ The weights for our model are to heavy to load into github but they can be found
 
 https://www.kaggle.com/datasets/ryches/unet3d
 
-The weights included in the winning ensamble:
+The weights included in the winning ensemble:
 
+```
 "weight_path": "/kaggle/input/3d-unet/3d_unet_segformer_1024_3d_unet_segformer_final_all_train.pth"
 "weight_path": "/kaggle/input/3d-unet/3d_unet_segformer_512_3d_unet_segformer_final.pth"
 "weight_path": "/kaggle/input/3d-unet/3dunet_segformer_1024_swa_slow_all_train_3dunet_segformer_final.pth"
@@ -124,9 +126,8 @@ The weights included in the winning ensamble:
 "weight_path": "/kaggle/input/3d-unet/Jumbo_Unet_Jumbo_Unet_69_final_swa_all_train.pth"
 "weight_path": "/kaggle/input/3d-unet/jumbo_unetr_unetr_888_final_swa_all_train_long.pth"
 "weight_path": "/kaggle/input/3d-unet/unetr_multiclass_NOVALIDATION_512_b5_unet_final_swa_all_train.pth"
-
+```
 Make sure to download them to reproduce our solution.
-
 ```
 pip install kaggle
 export KAGGLE_USERNAME=<kaggle_username>
