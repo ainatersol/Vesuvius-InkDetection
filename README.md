@@ -70,7 +70,7 @@ We were finding difficulties pip installing the unet3d implementation. Hence, we
 
 The original repo can be cloned as follows:
 ```
-!cd /root && git clone git@github.com:wolny/pytorch-3dunet.git && cd pytorch-3dunet && pip install -e .
+cd /root && git clone git@github.com:wolny/pytorch-3dunet.git && cd pytorch-3dunet && pip install -e .
 ```
 (If you want to use the official repo; remember to add the repo to the python path to be able to use the content in the unet3d folder)
 
