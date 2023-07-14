@@ -121,6 +121,7 @@ https://www.kaggle.com/datasets/ryches/unet3d
 
 The weights included in the winning ensemble:
 
+```
 "weight_path": "/kaggle/input/3d-unet/3d_unet_segformer_1024_3d_unet_segformer_final_all_train.pth"
 "weight_path": "/kaggle/input/3d-unet/3d_unet_segformer_512_3d_unet_segformer_final.pth"
 "weight_path": "/kaggle/input/3d-unet/3dunet_segformer_1024_swa_slow_all_train_3dunet_segformer_final.pth"
@@ -130,7 +131,7 @@ The weights included in the winning ensemble:
 "weight_path": "/kaggle/input/3d-unet/Jumbo_Unet_Jumbo_Unet_69_final_swa_all_train.pth"
 "weight_path": "/kaggle/input/3d-unet/jumbo_unetr_unetr_888_final_swa_all_train_long.pth"
 "weight_path": "/kaggle/input/3d-unet/unetr_multiclass_NOVALIDATION_512_b5_unet_final_swa_all_train.pth"
-
+```
 Make sure to download them to reproduce our solution.
 ```
 pip install kaggle
