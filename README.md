@@ -159,7 +159,7 @@ The models included in our winning ensemble:
 - UNETR_SegformerMC
 - UNETR_MulticlassSegformer*
 
-* this model should be trained using the multiclass training notebook
+*this model should be trained using the multiclass training notebook
 
 
 ## 5. Inference
