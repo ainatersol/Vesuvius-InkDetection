@@ -14,11 +14,11 @@ Key success factors included the ensemble of multiple model variants, the select
 
 1. Install the requirements file: `pip install -r requirements.txt`
 2. Run training using the `training` notebook OR download pretrained weights from https://www.kaggle.com/datasets/ryches/unet3d
-3. Run inference using the `inference` notebook. Note that, by default, the inference notebook will run with the pretrained weights from the winning ensamble. If needed, replace the inference weights with the ones obtained in step2. 
+3. Run inference using the `inference` notebook. Note that, by default, the inference notebook will run with the pretrained weights from the winning ensemble. If needed, replace the inference weights with the ones obtained in step2. 
 
 Our notebooks are designed to run without any additional setup. Just click `restart kernel and run all` and you will be good to go. The default version of the `training` notebook will train the 3DCNN-Segformer 2 stage model and output a `.pth` weights file.
 
-Disclaimer: Our winning solution is an ensamble of 9 different models, without the pretrained weights you will have to train them. The pretrained weights can be found here: https://www.kaggle.com/datasets/ryches/unet3d
+Disclaimer: Our winning solution is an ensemble of 9 different models, without the pretrained weights you will have to train them. The pretrained weights can be found here: https://www.kaggle.com/datasets/ryches/unet3d
 
 
 ## 1. Hardware requirements
@@ -54,7 +54,7 @@ We have one inference notebook.
 
 The `external` folder contains helper functions defining the different model architectures `model.py`, dataloading, postprocessing utils... 
 
-Kindly note that, this implementation supports multiple sota architectures (3DCNN, 3DUNETR..). This should allow uses to easily switch between different verisons of the code (including all of the architectures from the 9-model ensamble that won the competition). The different models are available undel `model.py` and to load them just replace the name in the training notebook such as:
+Kindly note that, this implementation supports multiple sota architectures (3DCNN, 3DUNETR..). This should allow uses to easily switch between different verisons of the code (including all of the architectures from the 9-model ensemble that won the competition). The different models are available undel `model.py` and to load them just replace the name in the training notebook such as:
 
 ```
 model = UNETR_Segformer(CFG) 
@@ -147,7 +147,7 @@ You can modify the model trained by simply switching the model name:
 model = UNETR_Segformer(CFG) 
 ```
 
-The models included in our winning ensamble:
+The models included in our winning ensemble:
 - CNN3D_Segformer
 - cnn3d_more_filters
 - unet3d_segformer
@@ -161,11 +161,11 @@ The models included in our winning ensamble:
 
 ## 5. Inference
 
-Run inference using the `inference` notebook. Note that, by default, the inference notebook will run with the pretrained weights from the winning ensamble. If needed, replace the inference weights with the ones obtained during training.
+Run inference using the `inference` notebook. Note that, by default, the inference notebook will run with the pretrained weights from the winning ensemble. If needed, replace the inference weights with the ones obtained during training.
 
 Our notebooks are designed to run without any additional setup. Just click `restart kernel and run all` and you will be good to go. 
 
-Disclaimer: Our winning solution is an ensamble of 9 different models, without the pretrained weights you will have to train them. The pretrained weights can be found here: https://www.kaggle.com/datasets/ryches/unet3d
+Disclaimer: Our winning solution is an ensemble of 9 different models, without the pretrained weights you will have to train them. The pretrained weights can be found here: https://www.kaggle.com/datasets/ryches/unet3d
 
 
 # Citation
