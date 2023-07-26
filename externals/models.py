@@ -283,6 +283,7 @@ class UNETR_Segformer(nn.Module):
             in_channels=1,
             out_channels=32,
             img_size=(16, 512, 512),
+            conv_block = True
         )
         self.encoder_2d = SegformerForSemanticSegmentation.from_pretrained(
             "nvidia/mit-b5",
