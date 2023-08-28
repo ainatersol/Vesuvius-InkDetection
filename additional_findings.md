@@ -30,9 +30,11 @@ validation predictions for fragment 1 at 8 micrometer input resolution. Raw and 
 After seeing that the output was decayed but not ruined I tried applying additional models to the monster scroll, both recto and verso sides. Eventually, I was able to get what seemed like a couple letter correctly lined up, but I am still not completely convinced these are true findings or just coincidental hallucinations because other models that were more accurate during the competition did not yield a similar pattern. One point to it's credit though, the model is given tiles of input and this is showing consistency across these tiled boundaries so maybe there is actually something there. 
 
 Prediction against the entire monster fragment
+
 ![image](https://github.com/ainatersol/Vesuvius-InkDetection/blob/main/monster_prediction.png)
 
 Small region that looks potentially like a couple letters
+
 ![image](https://github.com/ainatersol/Vesuvius-InkDetection/blob/main/possible_letters.png)
 
 
@@ -45,6 +47,8 @@ https://github.com/ainatersol/Vesuvius-InkDetection/blob/main/frag_1_16_layers.m
 Monster fragment 16 layer video
 
 https://github.com/ainatersol/Vesuvius-InkDetection/blob/main/monster_frag_16_layers.mp4
+
+I personally don't feel like I can see anything in these layers, but others in the discord seem to think they can see some patterns. Maybe I just need to stare at the tea leaves some more. 
 
 16 layer close up of possible letters
 
